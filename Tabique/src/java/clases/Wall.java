@@ -14,16 +14,19 @@ import java.util.ArrayList;
 public class Wall {
 
 private static Wall insWall = null;
-    private ArrayList<Mensaje> wall;
+private ArrayList<Mensaje> wall;
+private static String monitor="Monitor";
 
     private Wall(){
         wall=new ArrayList<Mensaje>();
     }
 
     public static Wall getInstance() {
-        if (insWall == null)
-            insWall=new Wall();
-
+        synchronized (monitor) {
+            if (insWall == null) {
+                insWall = new Wall();
+            }
+        }
         return insWall;
     }
 

@@ -15,14 +15,26 @@ public class Usuarios {
 
     private static Usuarios insUsuarios = null;
     private ArrayList<Usuario> usuarios;
+    private static String monitor="Monitor";
+
+    private static void usuariosPrueba() {
+        insUsuarios.addUsuario(Rol.Invitado, "Aleix");
+        insUsuarios.addUsuario(Rol.Autorizado, "Sergio");
+        insUsuarios.addUsuario(Rol.Administrador, "Dios");
+    }
 
     private Usuarios(){
         usuarios=new ArrayList<Usuario>();
     }
 
     public static Usuarios getInstance() {
-        if (insUsuarios == null)
-            insUsuarios=new Usuarios();
+
+        synchronized (monitor) {
+            if (insUsuarios == null) {
+                insUsuarios = new Usuarios();
+                usuariosPrueba();
+            }
+        }
 
         return insUsuarios;
     }
