@@ -106,6 +106,18 @@ public class Usuarios {
         return usuarios.size();
     }
 
+    public boolean validaUsuario(String tipo,String nombre){
+        for (int i=0; i<usuarios.size(); i++){
+            if (usuarios.get(i).getNombre().equals(nombre)) {
+                if (usuarios.get(i).getRol().toString().equalsIgnoreCase(tipo))
+                    return true;
+                else
+                    return false;
+            }
+
+        }
+        return false;
+    }
 
 
 }

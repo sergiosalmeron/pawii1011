@@ -30,4 +30,17 @@ private static String monitor="Monitor";
         return insWall;
     }
 
+    public void meteMensaje(Mensaje  mensa){
+        wall.add(mensa);
+    }
+
+    public Mensaje dameMensaje(int i) {
+        if ((i >= 0) && (i < wall.size())) {
+            return wall.get(i);
+        }
+        else {
+            return null;
+        }
+    }
+
 }

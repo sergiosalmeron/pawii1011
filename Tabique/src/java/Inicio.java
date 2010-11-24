@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  * @author Aleix
  */
 public class Inicio extends HttpServlet {
+
+    private boolean loginErroneo=false;
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -47,6 +49,9 @@ public class Inicio extends HttpServlet {
             out.println("<INPUT type=\"submit\" value=\"Enviar\">");
             out.println("</P>");
             out.println("</FORM>");
+            if (loginErroneo){
+                out.println("Pillo");
+            }
 
             out.println("</body>");
             out.println("</html>");
@@ -96,18 +101,23 @@ public class Inicio extends HttpServlet {
     }// </editor-fold>
 
     private void procesaLogin(String tipo, String nombre, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    if (tipo!=null){
-            if (tipo.equals("Invitado")){
-                RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/WEB-INF/Invitado.jsp");
-                reqDispatcher.forward(request,response);
+        if ((tipo!=null)&&(nombre!=null)){
+            if (Usuarios.getInstance().validaUsuario(tipo, nombre)){
+                    if (tipo.equals("Invitado")){
+                        RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/WEB-INF/Invitado.jsp");
+                        reqDispatcher.forward(request,response);
+                    }
+                    if (tipo.equals("Autorizado")){
+                        RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/WEB-INF/Autorizado.jsp");
+                        reqDispatcher.forward(request,response);
+                    }
+                    if (tipo.equals("Administrador")){
+                        RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/WEB-INF/Administrador.jsp");
+                        reqDispatcher.forward(request,response);
+                    }
             }
-            if (tipo.equals("Autorizado")){
-                RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/WEB-INF/Autorizado.jsp");
-                reqDispatcher.forward(request,response);
-            }
-            if (tipo.equals("Administrador")){
-                RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/WEB-INF/Administrador.jsp");
-                reqDispatcher.forward(request,response);
+            else{
+                loginErroneo=true;
             }
         }
     }

@@ -1,7 +1,7 @@
 <%-- 
-    Document   : Invitado
-    Created on : 23-nov-2010, 19:48:27
-    Author     : Aleix
+    Document   : VisorTabique
+    Created on : 24-nov-2010, 13:37:43
+    Author     : usuario_local
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -14,7 +14,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Eres un Invitado!</h1>
-        <jsp:include page="VisorTabique.jsp" />
+        <h1>Tabique</h1>
+
     </body>
 </html>
