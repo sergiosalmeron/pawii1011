@@ -14,7 +14,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Eres un Invitado!</h1>
-        <jsp:include page="VisorTabique.jsp" />
+        <jsp:include page="Modulos/Opciones.jsp" />
+        <jsp:include page="Modulos/VisorTabique.jsp" />
     </body>
 </html>

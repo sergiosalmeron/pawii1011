@@ -17,10 +17,10 @@ public class Mensaje {
     private String texto;
     private Date fecha;
 
-    public Mensaje(Usuario autor, String texto, Date fecha) {
+    public Mensaje(Usuario autor, String texto) {
         this.autor = autor;
         this.texto = texto;
-        this.fecha = fecha;
+        this.fecha = new Date();
     }
 
     public Usuario getAutor() {

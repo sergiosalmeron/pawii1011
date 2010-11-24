@@ -14,6 +14,10 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Eres un Admin!</h1>
+        <jsp:include page="Modulos/Opciones.jsp" />
+        <jsp:include page="Modulos/VisorTabique.jsp" />
+        <jsp:include page="Modulos/EditorMensajes.jsp" />
+        <jsp:include page="Modulos/VisorUsuarios.jsp" />
+
     </body>
 </html>

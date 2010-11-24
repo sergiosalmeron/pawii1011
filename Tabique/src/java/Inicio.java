@@ -4,6 +4,8 @@
  */
 
 
+import clases.Rol;
+import clases.Usuario;
 import clases.Usuarios;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -50,7 +52,8 @@ public class Inicio extends HttpServlet {
             out.println("</P>");
             out.println("</FORM>");
             if (loginErroneo){
-                out.println("Pillo");
+                out.println("Debes introducir un nombre de usuario y rol válidos.");
+                loginErroneo=false;
             }
 
             out.println("</body>");
@@ -72,9 +75,8 @@ public class Inicio extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String tipo=request.getParameter("tipo");
-        String nombre=request.getParameter("nombre");
-        procesaLogin(tipo, nombre, request, response);
+        procesaLogin(request);
+        redirige(request, response);
         processRequest(request, response);
     } 
 
@@ -88,6 +90,7 @@ public class Inicio extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        procesaSalir(request, response);
         processRequest(request, response);
     }
 
@@ -100,26 +103,48 @@ public class Inicio extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void procesaLogin(String tipo, String nombre, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if ((tipo!=null)&&(nombre!=null)){
+    private void procesaLogin(HttpServletRequest request) throws ServletException, IOException {
+        int valoresNull=0;
+        String tipo=request.getParameter("tipo");
+        if (tipo==null)
+            valoresNull++;
+        String nombre=request.getParameter("nombre");
+        if (nombre==null)
+            valoresNull++;
+        if (valoresNull==0){
             if (Usuarios.getInstance().validaUsuario(tipo, nombre)){
-                    if (tipo.equals("Invitado")){
+                    request.getSession(true).setAttribute("usuario", Usuarios.getInstance().getusuario(nombre));
+            }
+            loginErroneo=true;
+        }
+        else{
+            if (valoresNull==1)
+                loginErroneo=true;
+        }
+    }
+
+    private void redirige(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        Usuario us=(Usuario) request.getSession(false).getAttribute("usuario");
+        if (us!=null){
+            if (us.getRol().equals(Rol.Invitado)){
                         RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/WEB-INF/Invitado.jsp");
                         reqDispatcher.forward(request,response);
                     }
-                    if (tipo.equals("Autorizado")){
+                    if (us.getRol().equals(Rol.Autorizado)){
                         RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/WEB-INF/Autorizado.jsp");
                         reqDispatcher.forward(request,response);
                     }
-                    if (tipo.equals("Administrador")){
+                    if (us.getRol().equals(Rol.Administrador)){
                         RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/WEB-INF/Administrador.jsp");
                         reqDispatcher.forward(request,response);
                     }
-            }
-            else{
-                loginErroneo=true;
-            }
         }
+    }
+
+    private void procesaSalir(HttpServletRequest request, HttpServletResponse response) {
+        String salir=request.getParameter("salir");
+        if (salir!=null)
+            request.getSession().setAttribute("usuario", null);
     }
 
 }

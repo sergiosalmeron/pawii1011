@@ -34,6 +34,9 @@ public class Usuario {
         this.rol = rol;
     }
 
+    public String toString(){
+        return nombre+"("+rol.toString()+")";
+    }
 
 
 }

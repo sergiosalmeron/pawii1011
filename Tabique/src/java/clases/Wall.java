@@ -6,6 +6,7 @@
 package clases;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -41,6 +42,10 @@ private static String monitor="Monitor";
         else {
             return null;
         }
+    }
+
+    public int size () {
+        return wall.size();
     }
 
 }
