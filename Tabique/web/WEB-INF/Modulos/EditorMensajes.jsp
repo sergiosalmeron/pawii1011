@@ -14,7 +14,7 @@
 %>
 
 <h1>Editor de mensajes</h1>
-    <FORM action="EditorMensajes.jsp" method="post">
+    <FORM action="FuncionesTabique" method="post">
         <INPUT type="text" name="mensaje" value="Escriba aquí su mensaje">
         <input type="submit" value="Enviar">
 

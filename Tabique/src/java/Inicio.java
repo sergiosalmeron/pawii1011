@@ -123,21 +123,23 @@ public class Inicio extends HttpServlet {
         }
     }
 
-    private void redirige(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        Usuario us=(Usuario) request.getSession(false).getAttribute("usuario");
-        if (us!=null){
-            if (us.getRol().equals(Rol.Invitado)){
-                        RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/WEB-INF/Invitado.jsp");
-                        reqDispatcher.forward(request,response);
-                    }
-                    if (us.getRol().equals(Rol.Autorizado)){
-                        RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/WEB-INF/Autorizado.jsp");
-                        reqDispatcher.forward(request,response);
-                    }
-                    if (us.getRol().equals(Rol.Administrador)){
-                        RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/WEB-INF/Administrador.jsp");
-                        reqDispatcher.forward(request,response);
-                    }
+    private void redirige(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Usuario us = (Usuario) request.getSession(false).getAttribute("usuario");
+        if (us != null) {
+            RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/WEB-INF/Usuario.jsp");
+            reqDispatcher.forward(request,response);
+            /* if (us.getRol().equals(Rol.Invitado)){
+            RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/WEB-INF/Invitado.jsp");
+            reqDispatcher.forward(request,response);
+            }
+            if (us.getRol().equals(Rol.Autorizado)){
+            RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/WEB-INF/Autorizado.jsp");
+            reqDispatcher.forward(request,response);
+            }
+            if (us.getRol().equals(Rol.Administrador)){
+            RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/WEB-INF/Administrador.jsp");
+            reqDispatcher.forward(request,response);
+            }*/
         }
     }
 
