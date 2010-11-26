@@ -42,7 +42,7 @@ public class Inicio extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
 
-            out.println("<FORM action=\"Inicio\" method=\"get\">");
+            out.println("<FORM action=\"Inicio\" method=\"post\">");
             out.println("<P>");
             out.println("Nombre: <INPUT type=\"text\" name=\"nombre\"><BR>");
             out.println("<INPUT type=\"radio\" name=\"tipo\" value=\"Invitado\"> Invitado<BR>");
@@ -75,7 +75,6 @@ public class Inicio extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        procesaLogin(request);
         redirige(request, response);
         processRequest(request, response);
     } 
@@ -91,6 +90,8 @@ public class Inicio extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         procesaSalir(request, response);
+        procesaLogin(request);
+        redirige(request, response);
         processRequest(request, response);
     }
 
@@ -145,8 +146,10 @@ public class Inicio extends HttpServlet {
 
     private void procesaSalir(HttpServletRequest request, HttpServletResponse response) {
         String salir=request.getParameter("salir");
-        if (salir!=null)
-            request.getSession().setAttribute("usuario", null);
+        if (salir!=null){
+            request.getSession().removeAttribute("usuario");
+           // request.getSession().invalidate();
+        }
     }
 
 }

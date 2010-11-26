@@ -8,6 +8,10 @@
         <servlet-name>FuncionesTabique</servlet-name>
         <servlet-class>FuncionesTabique</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FuncionesUsuarios</servlet-name>
+        <servlet-class>FuncionesUsuarios</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Inicio</servlet-name>
         <url-pattern>/Inicio</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>FuncionesTabique</servlet-name>
         <url-pattern>/FuncionesTabique</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FuncionesUsuarios</servlet-name>
+        <url-pattern>/FuncionesUsuarios</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

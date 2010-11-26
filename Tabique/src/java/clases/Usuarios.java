@@ -132,5 +132,12 @@ public class Usuarios {
         return usuarios.size();
     }
 
+    public static Rol dameRol(String rol){
+        if (rol.equalsIgnoreCase("Administrador"))
+            return Rol.Administrador;
+        if (rol.equalsIgnoreCase("Autorizado"))
+            return Rol.Autorizado;
+        return Rol.Invitado;
+    }
 
 }

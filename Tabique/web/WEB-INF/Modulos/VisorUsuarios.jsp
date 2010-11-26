@@ -18,7 +18,8 @@
         %>
                 <%=nombre%>: es <%=rol.toString()%>. Convertir en:
                 <br />
-                <FORM action="EditorMensajes.jsp" method="post">
+                <FORM action="FuncionesUsuarios" method="post">
+                <input type="hidden" name="victima" value="<%=nombre%>" />
                 <%if (!rol.equals(Rol.Administrador))
                     out.print("<input type=\"submit\" name=\"nuevoRol\" value=\"Administrador\">");
                 if (!rol.equals(Rol.Autorizado))

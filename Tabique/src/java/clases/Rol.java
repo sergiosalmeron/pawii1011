@@ -12,3 +12,5 @@ package clases;
 public enum Rol {Invitado, Autorizado, Administrador
 
 }
+
+

@@ -8,7 +8,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 
-Hola <%=session.getAttribute("usuario")%>
+Hola &nbsp <%=session.getAttribute("usuario")%>
 <form action="Inicio" method="post">
     <input type="hidden" name="salir" value="true" />
     <INPUT type="submit" value="Salir" />
