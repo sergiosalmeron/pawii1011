@@ -13,7 +13,7 @@
 <%
     Usuario us= (Usuario)session.getAttribute("usuario");
     if (us==null){
-        RequestDispatcher fwd = request.getRequestDispatcher("Inicio");
+        RequestDispatcher fwd = request.getRequestDispatcher("../Inicio");
         try{
             fwd.forward(request,response);
         }catch(Exception se){
@@ -32,10 +32,19 @@
         <% 
         
             switch (us.getRol()){
-                case Invitado: %>   <jsp:include page="Modulos/VisorTabique.jsp" /> <%; break;
-                case Autorizado:%>  <jsp:include page="Modulos/VisorTabique.jsp" />
-                                        <jsp:include page="Modulos/EditorMensajes.jsp" /> <%; break;
-                case Administrador:%> <jsp:include page="Modulos/VisorUsuarios.jsp" /> <%; break;
+                case Invitado: %>   
+                    <jsp:include page="Modulos/VisorTabique.jsp" />
+                    <%; break;
+                case Autorizado:%>
+                    <jsp:include page="Modulos/VisorTabique.jsp" />
+                    <jsp:include page="Modulos/MuestraMensaje.jsp" />>
+                    <jsp:include page="Modulos/EditorMensajes.jsp" />
+                    <%; break;
+                case Administrador:%> 
+                    <jsp:include page="Modulos/CreadorUsuarios.jsp" />
+                    <jsp:include page="Modulos/MuestraMensaje.jsp" />
+                    <jsp:include page="Modulos/VisorUsuarios.jsp" />
+                    <%; break;
             }
          %>
     </body>
