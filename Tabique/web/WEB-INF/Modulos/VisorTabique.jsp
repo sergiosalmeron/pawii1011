@@ -23,8 +23,7 @@
         -Autor: <%=m.getAutor().getNombre()%><br />
         -Texto: <%=m.getTexto()%><br />
 --%>
-                <%=m.getAutor().getNombre()%>: <%=m.getTexto()%>[<%=m.getFecha()%>]<br />
+<strong><%=m.getAutor().getNombre()%>:</strong> <%=m.getTexto()%>[<%=m.getFecha()%>]<br />
         <%
             }
         %>
-

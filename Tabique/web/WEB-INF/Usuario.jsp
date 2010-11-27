@@ -24,29 +24,53 @@
 %>
 <html>
     <head>
+        <link rel="stylesheet" type="text/css" href="Estilo/style.css">
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>El Tabique</title>
     </head>
     <body>
-        <jsp:include page="Modulos/Opciones.jsp" />
+        <div id="page">
+            <div id="header">
+                <jsp:include page="Modulos/Opciones.jsp" />
+            </div>
+        
+
         <% 
         
             switch (us.getRol()){
-                case Invitado: %>   
-                    <jsp:include page="Modulos/VisorTabique.jsp" />
+                case Invitado: %>
+                    <div id="contentarea">
+                        <jsp:include page="Modulos/VisorTabique.jsp" />
+                    </div>
                     <%; break;
                 case Autorizado:%>
-                    <jsp:include page="Modulos/VisorTabique.jsp" />
-                    <jsp:include page="Modulos/MuestraMensaje.jsp" />>
-                    <jsp:include page="Modulos/EditorMensajes.jsp" />
+                    <div id="contentarea">
+                        <jsp:include page="Modulos/MuestraMensaje.jsp" />
+                        <jsp:include page="Modulos/VisorTabique.jsp" />
+                    
+                    </div>
+                    <div id="sidebar">
+                        <jsp:include page="Modulos/EditorMensajes.jsp" />
+                    </div>
                     <%; break;
                 case Administrador:%> 
-                    <jsp:include page="Modulos/CreadorUsuarios.jsp" />
-                    <jsp:include page="Modulos/MuestraMensaje.jsp" />
-                    <jsp:include page="Modulos/VisorUsuarios.jsp" />
+                    <div id="contentarea">
+                        <jsp:include page="Modulos/MuestraMensaje.jsp" />
+                        <jsp:include page="Modulos/VisorUsuarios.jsp" />
+                    </div>
+                    <div id="sidebar">
+                    
+                        <jsp:include page="Modulos/CreadorUsuarios.jsp" />
+                    </div>
                     <%; break;
             }
          %>
+        
+        <div id="footer">
+            Creado por Sergio Salmerón y Aleix Garrido
+        </div>
+        </div>
     </body>
 </html>
 <% }%>

@@ -83,10 +83,18 @@ public class FuncionesTabique extends HttpServlet {
         Usuario us = (Usuario) request.getSession(false).getAttribute("usuario");
         String contenido = (String) request.getParameter("mensaje");
         if (us != null && us.getRol() == Rol.Autorizado && contenido != null) {
-            Mensaje m = new Mensaje(us, contenido);
-            posteaMensaje(m, request);
+            if (!contenido.equalsIgnoreCase("")){
+                Mensaje m = new Mensaje(us, contenido);
+                posteaMensaje(m, request);
+            }
+            else{
+                request.getSession(false).setAttribute("MensajeStatus", new MensajePantalla("ERROR, no se pueden publicar mensajes sin texto.", true));
 
-        } else {
+            }
+            
+
+        }
+        else {
             request.getSession(false).setAttribute("MensajeStatus", new MensajePantalla("ERROR, no se ha podido publicar el mensaje", true));
         }
 

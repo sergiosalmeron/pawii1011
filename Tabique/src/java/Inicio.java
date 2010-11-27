@@ -38,24 +38,32 @@ public class Inicio extends HttpServlet {
             // TODO output your page here
             out.println("<html>");
             out.println("<head>");
+            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"Estilo/style.css\">");
             out.println("<title>El Tabique</title>");
             out.println("</head>");
             out.println("<body>");
-
-            out.println("<FORM action=\"Inicio\" method=\"post\">");
-            out.println("<P>");
-            out.println("Nombre: <INPUT type=\"text\" name=\"nombre\"><BR>");
-            out.println("<INPUT type=\"radio\" name=\"tipo\" value=\"Invitado\"> Invitado<BR>");
-            out.println("<INPUT type=\"radio\" name=\"tipo\" value=\"Autorizado\"> Autorizado<BR>");
-            out.println("<INPUT type=\"radio\" name=\"tipo\" value=\"Administrador\"> Administrador<BR>");
-            out.println("<INPUT type=\"submit\" value=\"Enviar\">");
-            out.println("</P>");
-            out.println("</FORM>");
-            if (loginErroneo){
-                out.println("Debes introducir un nombre de usuario y rol válidos.");
-                loginErroneo=false;
-            }
-
+            out.println("<div id=\"page\">");
+                out.println("<div id=\"header\">");
+                out.println("<h1>El tabique</h1>");
+                out.println("</div>");
+                out.println("<div id=\"contentarea\">");
+                    out.println("<FORM action=\"Inicio\" method=\"post\">");
+                    out.println("<P>");
+                    out.println("Nombre: <INPUT type=\"text\" name=\"nombre\"><BR>");
+                    out.println("<INPUT type=\"radio\" name=\"tipo\" value=\"Invitado\"> Invitado<BR>");
+                    out.println("<INPUT type=\"radio\" name=\"tipo\" value=\"Autorizado\"> Autorizado<BR>");
+                    out.println("<INPUT type=\"radio\" name=\"tipo\" value=\"Administrador\"> Administrador<BR>");
+                    out.println("<INPUT type=\"submit\" value=\"Enviar\">");
+                    out.println("</P>");
+                    out.println("</FORM>");
+                    if (loginErroneo){
+                        out.println("Debes introducir un nombre de usuario y rol válidos.");
+                        loginErroneo=false;
+                    }
+                out.println("</div>");
+                out.println("<div id=\"footer\">");
+                    out.println("Creado por Sergio Salmerón y Aleix Garrido");
+                out.println("</div>");
             out.println("</body>");
             out.println("</html>");
             
