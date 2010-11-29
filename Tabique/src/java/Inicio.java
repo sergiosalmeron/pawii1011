@@ -11,9 +11,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 
 /**
  *
@@ -98,7 +101,7 @@ public class Inicio extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         procesaSalir(request, response);
-        procesaLogin(request);
+        procesaLogin(request, response);
         redirige(request, response);
         processRequest(request, response);
     }
@@ -112,7 +115,7 @@ public class Inicio extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void procesaLogin(HttpServletRequest request) throws ServletException, IOException {
+    private void procesaLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int valoresNull=0;
         String tipo=request.getParameter("tipo");
         if (tipo==null)
@@ -122,7 +125,13 @@ public class Inicio extends HttpServlet {
             valoresNull++;
         if (valoresNull==0){
             if (Usuarios.getInstance().validaUsuario(tipo, nombre)){
-                    request.getSession(true).setAttribute("usuario", Usuarios.getInstance().getusuario(nombre));
+                    Usuario usuario=Usuarios.getInstance().getusuario(nombre);
+                    request.getSession(true).setAttribute("usuario", usuario);
+                    Cookie c1 = new Cookie("usuario", usuario.getNombre());
+                    Cookie c2 = new Cookie("tipo", usuario.getRol().toString());
+                    response.addCookie(c1);
+                    response.addCookie(c2);
+
             }
             loginErroneo=true;
         }
@@ -133,31 +142,56 @@ public class Inicio extends HttpServlet {
     }
 
     private void redirige(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Usuario us = (Usuario) request.getSession(false).getAttribute("usuario");
+        HttpSession sesion=request.getSession(false);
+        String a="dd";
+        Usuario us=null;
+        if (sesion!=null)
+            us = (Usuario) request.getSession(false).getAttribute("usuario");
         if (us != null) {
             RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/WEB-INF/Usuario.jsp");
             reqDispatcher.forward(request,response);
-            /* if (us.getRol().equals(Rol.Invitado)){
-            RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/WEB-INF/Invitado.jsp");
-            reqDispatcher.forward(request,response);
-            }
-            if (us.getRol().equals(Rol.Autorizado)){
-            RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/WEB-INF/Autorizado.jsp");
-            reqDispatcher.forward(request,response);
-            }
-            if (us.getRol().equals(Rol.Administrador)){
-            RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/WEB-INF/Administrador.jsp");
-            reqDispatcher.forward(request,response);
-            }*/
         }
+        Cookie c1=getCookie(request, "usuario");
+        Cookie c2=getCookie(request, "tipo");
+        if (c1!=null && c2!=null){
+            if (Usuarios.getInstance().validaUsuario(c2.getValue(), c1.getValue())){
+                Usuario usuario=Usuarios.getInstance().getusuario(c1.getValue());
+                request.getSession(true).setAttribute("usuario", usuario);
+                RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/WEB-INF/Usuario.jsp");
+                reqDispatcher.forward(request,response);
+            }
+            else
+                eliminaCookies(request);
+         }
     }
 
     private void procesaSalir(HttpServletRequest request, HttpServletResponse response) {
         String salir=request.getParameter("salir");
         if (salir!=null){
             request.getSession().removeAttribute("usuario");
+            eliminaCookies(request);
            // request.getSession().invalidate();
         }
     }
+
+    private Cookie getCookie( HttpServletRequest request, String cookieName ) {
+      Cookie[] cookies = request.getCookies();
+      for(int i=0; cookies != null && i < cookies.length; i++) {
+	 Cookie cookie = cookies[i];
+	 if (cookieName.equals(cookie.getName()))
+	    return cookie;
+      }
+      return null;
+    }
+
+    private void eliminaCookies(HttpServletRequest request){
+        Cookie c1=getCookie(request, "usuario");
+        if (c1!=null)
+            c1.setMaxAge(0);
+        Cookie c2=getCookie(request, "tipo");
+        if (c2!=null)
+            c2.setMaxAge(0);
+    }
+
 
 }

@@ -109,8 +109,9 @@ public class Usuarios {
 
     public boolean validaUsuario(String tipo,String nombre){
         for (int i=0; i<usuarios.size(); i++){
-            if (usuarios.get(i).getNombre().equals(nombre)) {
-                if (usuarios.get(i).getRol().toString().equalsIgnoreCase(tipo))
+            Usuario us=usuarios.get(i);
+            if (us.getNombre().equals(nombre)) {
+                if (us.getRol().toString().equalsIgnoreCase(tipo))
                     return true;
                 else
                     return false;
