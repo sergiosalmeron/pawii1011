@@ -16,7 +16,7 @@
                 String nombre=Usuarios.getInstance().getNombreUsuario(i);
                 Rol rol=Usuarios.getInstance().getRolUsuario(i);
         %>
-                <%=nombre%>: es <%=rol.toString()%>. Convertir en:
+        <%=nombre%>: es <%=rol.toString()%>. Convertir en:
                 <br />
                 <FORM action="FuncionesUsuarios" method="post">
                 <input type="hidden" name="victima" value="<%=nombre%>" />

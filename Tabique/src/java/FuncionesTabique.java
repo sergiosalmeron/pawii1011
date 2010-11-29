@@ -32,22 +32,9 @@ public class FuncionesTabique extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-            /* TODO output your page here
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet FuncionesTabique</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet FuncionesTabique at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-            */
-        } finally { 
-            out.close();
-        }
+        response.sendRedirect("/eltabique/Inicio");
+        //RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/Inicio");
+        //reqDispatcher.forward(request, response);
     }
 
 
@@ -98,8 +85,7 @@ public class FuncionesTabique extends HttpServlet {
             request.getSession(false).setAttribute("MensajeStatus", new MensajePantalla("ERROR, no se ha podido publicar el mensaje", true));
         }
 
-        RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/WEB-INF/Usuario.jsp");
-        reqDispatcher.forward(request, response);
+        processRequest(request, response);
 
     }
 

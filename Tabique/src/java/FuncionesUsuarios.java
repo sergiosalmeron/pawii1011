@@ -31,24 +31,9 @@ public class FuncionesUsuarios extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-            //out.println(request.getParameter("victima"));
-           // out.println(request.getParameter("nuevoRol"));
-            /* TODO output your page here
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet FuncionesUsuarios</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet FuncionesUsuarios at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-            */
-        } finally { 
-            out.close();
-        }
+        response.sendRedirect("/eltabique/Inicio");
+        //RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/Inicio");
+        //reqDispatcher.forward(request, response);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -79,8 +64,8 @@ public class FuncionesUsuarios extends HttpServlet {
         cambiaRol(request, us);
         creaUsuario(request, us);
         eliminaUsuario(request, us);
-        RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/WEB-INF/Usuario.jsp");
-        reqDispatcher.forward(request, response);
+        //RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/WEB-INF/Usuario.jsp");
+        //reqDispatcher.forward(request, response);
         processRequest(request, response);
     }
 
