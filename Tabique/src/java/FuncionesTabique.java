@@ -68,7 +68,7 @@ public class FuncionesTabique extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Usuario us = (Usuario) request.getSession(false).getAttribute("usuario");
-        String contenido = (String) request.getParameter("mensaje");
+        String contenido = new String(request.getParameter("mensaje").getBytes("ISO-8859-1"),"UTF-8"); //request.getParameter("mensaje");
         if (us != null && us.getRol() == Rol.Autorizado && contenido != null) {
             if (!contenido.equalsIgnoreCase("")){
                 Mensaje m = new Mensaje(us, contenido);

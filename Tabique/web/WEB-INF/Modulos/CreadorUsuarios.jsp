@@ -10,7 +10,7 @@
 
 <h2>Crear usuario:</h2>
 <FORM action="FuncionesUsuarios" method="post">
-    Nombre de usuario: <INPUT type="text" name="nuevoUsuario" value="Escriba aquí el nombre del usuario"> <br />
+    Nombre de usuario: <INPUT type="text" size="16" name="nuevoUsuario" value="Escriba aquí el nombre del usuario"> <br />
     Rol:  <select name="nuevoRol" onchange="salta(this.form)">
                     <option value="Invitado">Invitado
                     <option value="Autorizado">Autorizado
@@ -22,7 +22,7 @@
 
 <h2>Eliminar usuario:</h2>
 <FORM action="FuncionesUsuarios" method="post">
-    Nombre de usuario: <INPUT type="text" name="viejoUsuario" value="Escriba aquí el nombre del usuario"><br />
+    Nombre de usuario: <INPUT type="text" size="16" name="viejoUsuario" value="Escriba aquí el nombre del usuario"><br />
      <input type="submit" value="Borrar">
 </FORM>
 

@@ -75,7 +75,6 @@ public class Inicio extends HttpServlet {
         }
     } 
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
      * Handles the HTTP <code>GET</code> method.
      * @param request servlet request
@@ -87,7 +86,7 @@ public class Inicio extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         redirige(request, response);
-        processRequest(request, response);
+        //processRequest(request, response);
     } 
 
     /** 
@@ -103,7 +102,7 @@ public class Inicio extends HttpServlet {
         procesaSalir(request, response);
         procesaLogin(request, response);
         redirige(request, response);
-        processRequest(request, response);
+        //processRequest(request, response);
     }
 
     /** 
@@ -113,7 +112,7 @@ public class Inicio extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
     private void procesaLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int valoresNull=0;
@@ -143,26 +142,35 @@ public class Inicio extends HttpServlet {
 
     private void redirige(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession sesion=request.getSession(false);
-        String a="dd";
+        boolean redir=false;
         Usuario us=null;
         if (sesion!=null)
             us = (Usuario) request.getSession(false).getAttribute("usuario");
         if (us != null) {
-            RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/WEB-INF/Usuario.jsp");
-            reqDispatcher.forward(request,response);
+            redir=true;
+            //RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/WEB-INF/Usuario.jsp");
+            //reqDispatcher.forward(request,response);
         }
-        Cookie c1=getCookie(request, "usuario");
+        /*Cookie c1=getCookie(request, "usuario");
         Cookie c2=getCookie(request, "tipo");
         if (c1!=null && c2!=null){
             if (Usuarios.getInstance().validaUsuario(c2.getValue(), c1.getValue())){
                 Usuario usuario=Usuarios.getInstance().getusuario(c1.getValue());
                 request.getSession(true).setAttribute("usuario", usuario);
-                RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/WEB-INF/Usuario.jsp");
-                reqDispatcher.forward(request,response);
+                redir=true;
+                //RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/WEB-INF/Usuario.jsp");
+                //reqDispatcher.forward(request,response);
             }
             else
                 eliminaCookies(request);
-         }
+         }*/
+
+        if (!redir)
+            processRequest(request, response);
+        else{
+            RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/WEB-INF/Usuario.jsp");
+            reqDispatcher.forward(request,response);
+        }
     }
 
     private void procesaSalir(HttpServletRequest request, HttpServletResponse response) {
