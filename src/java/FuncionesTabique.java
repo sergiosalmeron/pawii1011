@@ -4,20 +4,24 @@
  */
 
 
+import clases.Mensaje;
+import clases.MensajePantalla;
+import clases.Rol;
+import clases.Usuario;
+import clases.Wall;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author usuario_local
+ * @author Aleix
  */
-@WebServlet(name="HolaMundo", urlPatterns={"/HolaMundo"})
-public class HolaMundo extends HttpServlet {
+public class FuncionesTabique extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -28,23 +32,16 @@ public class HolaMundo extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-            /* TODO output your page here
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet HolaMundo</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet HolaMundo at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-            */
-        } finally { 
-            out.close();
-        }
-    } 
+        response.sendRedirect("/eltabique/Inicio");
+        //RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/Inicio");
+        //reqDispatcher.forward(request, response);
+    }
+
+
+    private void posteaMensaje(Mensaje mensaje,HttpServletRequest request){
+        Wall.getInstance().meteMensaje(mensaje);
+        request.getSession(false).setAttribute("MensajeStatus", new MensajePantalla("Mensaje: \""+ mensaje.getTexto()+ "\" Ha sido publicado.", false));
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -69,8 +66,27 @@ public class HolaMundo extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
+        Usuario us = (Usuario) request.getSession(false).getAttribute("usuario");
+        String contenido = new String(request.getParameter("mensaje").getBytes("ISO-8859-1"),"UTF-8"); //request.getParameter("mensaje");
+        if (us != null && us.getRol() == Rol.Autorizado && contenido != null) {
+            if (!contenido.equalsIgnoreCase("")){
+                Mensaje m = new Mensaje(us, contenido);
+                posteaMensaje(m, request);
+            }
+            else{
+                request.getSession(false).setAttribute("MensajeStatus", new MensajePantalla("ERROR, no se pueden publicar mensajes sin texto.", true));
+
+            }
+            
+
+        }
+        else {
+            request.getSession(false).setAttribute("MensajeStatus", new MensajePantalla("ERROR, no se ha podido publicar el mensaje", true));
+        }
+
         processRequest(request, response);
+
     }
 
     /** 
