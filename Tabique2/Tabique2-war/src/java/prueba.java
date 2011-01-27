@@ -48,14 +48,23 @@ public class prueba extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet prueba at " + request.getContextPath () + "</h1>");
-            Usuario usurero=new Usuario(Rol.Invitado, "Pepe");
+            Usuario usurero=new Usuario(Rol.Invitado, "Manolo");
             Mensaje m=new Mensaje(usurero, "probandooo");
            /*List<Mensaje> lista= mf.findLOQUESEA();
             for (Mensaje mensa : lista ){
                             out.println("uoo"+mensa.getMensaje()+mensa.getNumero());
 
             }*/
-            uf.create(usurero);
+            //uf.altaUsuario(usurero);
+            boolean debu;
+            debu=uf.login("Manolo", Rol.Invitado);
+            out.println("manolo es invitado?:"+debu);
+            debu=uf.login("Manolo", Rol.Administrador);
+            out.println("manolo es admin?:"+debu);
+            debu=uf.eliminaUsuario("Manolo");
+            out.println("fuera manolo:"+debu);
+            
+
             mensajeFacade.create(m);
 
             out.println("<h2>todo ok</h2>");
