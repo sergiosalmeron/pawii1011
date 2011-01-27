@@ -7,6 +7,7 @@ package entidades;
 
 import java.util.List;
 import javax.ejb.Local;
+import utiles.Rol;
 
 /**
  *
@@ -26,6 +27,11 @@ public interface UsuarioFacadeLocal {
     List<Usuario> findAll();
 
     List<Usuario> findRange(int[] range);
+
+    boolean altaUsuario(Usuario usu);
+    boolean setRolUsuario(Rol rol, String nombre);
+    boolean login(String nombre, Rol rol);
+    boolean eliminaUsuario(String nombre);
 
     int count();
 
