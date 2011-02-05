@@ -53,4 +53,12 @@ public class MensajeFacade extends AbstractFacade<Mensaje> implements MensajeFac
         return getEntityManager().createQuery(cq).getResultList();
     }
 
+      public int getLong(){
+          return this.count();
+      }
+
+      public List<Mensaje> getAllMenssages(){
+        return this.findAll();
+      }
+
 }

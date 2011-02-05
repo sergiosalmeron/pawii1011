@@ -28,10 +28,13 @@ public interface UsuarioFacadeLocal {
 
     List<Usuario> findRange(int[] range);
 
+    Usuario getUsuario(String nombre);
     boolean altaUsuario(Usuario usu);
     boolean setRolUsuario(Rol rol, String nombre);
     boolean login(String nombre, Rol rol);
+    boolean login(String nombre, String rol);
     boolean eliminaUsuario(String nombre);
+    public List<Usuario> getAllUsuarios();
 
     int count();
 

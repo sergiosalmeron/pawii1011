@@ -30,5 +30,6 @@ public interface MensajeFacadeLocal {
     int count();
 
     public List<Mensaje> findLOQUESEA();
+    public List<Mensaje> getAllMenssages();
 
 }
