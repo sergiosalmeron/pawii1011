@@ -21,6 +21,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
     @PersistenceContext(unitName = "Tabique2-ejbPU")
     private EntityManager em;
 
+    @Override
     protected EntityManager getEntityManager() {
         return em;
     }
@@ -48,7 +49,8 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
 
     }
 
-    private Usuario getUsuario(String nombre) {
+    @Override
+    public Usuario getUsuario(String nombre) {
 
         javax.persistence.criteria.CriteriaQuery cq =
                 getEntityManager().getCriteriaBuilder().createQuery(Usuario.class);
@@ -101,6 +103,16 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
     }
 
     @Override
+    public boolean login(String nombre, String rol){
+        Rol rolBD= this.getRolUsuario(nombre);
+        if (rolBD!=null){
+            if (rolBD.toString().equalsIgnoreCase(rol))
+                return true;
+        }
+        return false;
+    }
+
+    @Override
     public boolean eliminaUsuario(String nombre){
         Usuario usu=getUsuario(nombre);
         if (usu!=null){
@@ -108,6 +120,10 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
             return true;
         }
         return false;
+    }
+
+    public List<Usuario> getAllUsuarios(){
+        return this.findAll();
     }
 
 }
