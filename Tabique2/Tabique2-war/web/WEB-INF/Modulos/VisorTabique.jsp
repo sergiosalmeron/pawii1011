@@ -47,10 +47,11 @@
             List<Mensaje> lista=tabique.getAllMenssages();
             for (Mensaje m: lista){
         %>
-         Mensaje número <%=(i+1)%><br />
+<%--         Mensaje número <%=(i+1)%><br />
         -Fecha: <%=m.getFecha()%><br />
         -Autor: <%=m.getAutor().getNombre()%><br />
         -Texto: <%=m.getTexto()%><br />
+--%>
 
 <strong><%=m.getAutor().getNombre()%>:</strong> <%=m.getTexto()%> [<%=m.dameFecha()%>]<br />
         <%

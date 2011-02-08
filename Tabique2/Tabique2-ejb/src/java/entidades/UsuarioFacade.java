@@ -80,11 +80,35 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
     }
 
     @Override
+    public boolean altaUsuario(String rol, String nombre){
+        Rol rol2=dameRol(rol);
+        if (rol2!=null)
+            return altaUsuario(new Usuario(rol2, nombre));
+        else
+            return false;
+    }
+
+    @Override
     public boolean setRolUsuario(Rol rol, String nombre){
 
         Usuario usu=this.getUsuario(nombre);
         if (usu!=null){
             usu.setRol(rol);
+            this.edit(usu);
+            return true;
+        }
+        else
+            return false;
+    }
+
+    @Override
+    public boolean setRolUsuario(String rol, String nombre){
+
+        Usuario usu=this.getUsuario(nombre);
+        Rol rolNuevo=dameRol(rol);
+
+        if ((usu!=null)&&(rolNuevo!=null)){
+            usu.setRol(rolNuevo);
             this.edit(usu);
             return true;
         }
@@ -122,8 +146,20 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
         return false;
     }
 
+    @Override
     public List<Usuario> getAllUsuarios(){
-        return this.findAll();
+        return findAll();
     }
+
+    private Rol dameRol(String rol){
+        if (rol.equalsIgnoreCase("Administrador"))
+            return Rol.Administrador;
+        if (rol.equalsIgnoreCase("Autorizado"))
+            return Rol.Autorizado;
+        if (rol.equalsIgnoreCase("Invitado"))
+            return Rol.Invitado;
+        return null;
+    }
+
 
 }
