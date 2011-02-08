@@ -30,7 +30,9 @@ public interface UsuarioFacadeLocal {
 
     Usuario getUsuario(String nombre);
     boolean altaUsuario(Usuario usu);
+    public boolean altaUsuario(String rol, String nombre);
     boolean setRolUsuario(Rol rol, String nombre);
+    boolean setRolUsuario(String rol, String nombre);
     boolean login(String nombre, Rol rol);
     boolean login(String nombre, String rol);
     boolean eliminaUsuario(String nombre);
