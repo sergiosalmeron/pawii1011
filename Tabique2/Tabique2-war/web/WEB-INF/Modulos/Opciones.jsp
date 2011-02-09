@@ -13,6 +13,19 @@
         Hola &nbsp <%=session.getAttribute("usuario")%> &nbsp
     </div>
     <div id="menulinks">
+        <%String usrAgent=request.getHeader("User-Agent");
+          boolean esMovil=(usrAgent.toLowerCase().contains("iphone"))||(usrAgent.toLowerCase().contains("android"))||(usrAgent.toLowerCase().contains("symbian"));
+          if (!esMovil){
+        %>
+                <form action="Inicio" method="post">
+                    <select name="css" onchange="this.form.submit()">
+                        <option value="0">estilos</option>
+                        <option value="1">Estilo 1</option>
+                        <option value="2">Estilo 2</option>
+                    </select>
+                </form>
+        <%}
+        %>
         <form action="Inicio" method="post">
             <input type="hidden" name="salir" value="true" />
             <INPUT type="submit" value="Salir" />

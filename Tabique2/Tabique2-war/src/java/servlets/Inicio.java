@@ -45,13 +45,14 @@ public class Inicio extends HttpServlet {
         try {
             // TODO output your page here
             String usrAgent=request.getHeader("User-Agent");
-            boolean esMovil=(usrAgent.toLowerCase().contains("iphone"))||(usrAgent.toLowerCase().contains("android"));
+            boolean esMovil=(usrAgent.toLowerCase().contains("iphone"))||(usrAgent.toLowerCase().contains("android"))||(usrAgent.toLowerCase().contains("symbian"));
             out.println("<html>");
             out.println("<head>");
             if (esMovil)
                 out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"CSS/cssMob/style.css\">");
             else
-                out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"CSS/css2/style.css\">");
+                out.println(muestraCSS(request));
+                //out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"CSS/css1/style.css\">");
             out.println("<title>El Tabique</title>");
             out.println("</head>");
             out.println("<body>");
@@ -59,6 +60,7 @@ public class Inicio extends HttpServlet {
                 out.println("<div id=\"header\">");
                 out.println("<h1>El tabique</h1>");
                 out.println("</div>");
+                //<div id="menulinks">
                 out.println("<div id=\"contentarea\">");
                     out.println("<FORM action=\"Inicio\" method=\"post\">");
                     out.println("<P>");
@@ -109,6 +111,7 @@ public class Inicio extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        procesaEstilo(request);
         procesaSalir(request, response);
         procesaLogin(request, response);
         redirige(request, response);
@@ -211,5 +214,29 @@ public class Inicio extends HttpServlet {
             c2.setMaxAge(0);
     }
 
+    private void procesaEstilo(HttpServletRequest request){
+        String valorCss=request.getParameter("css");
+        if (valorCss!=null){
+            int css=Integer.parseInt(valorCss);
+            int valor=2;
+            if ((css>0)&&(css<3))
+                valor=css;
+            request.getSession().setAttribute("css", valor);
+        }
+    }
+
+    private String muestraCSS(HttpServletRequest request){
+        String resultado1="<link rel=\"stylesheet\" type=\"text/css\" href=\"CSS/css";
+        String resultado2="/style.css\">";
+        int css=2;
+        try{
+            css=Integer.parseInt( request.getSession().getAttribute("css").toString() );
+        } catch(Exception e){
+
+        }
+
+
+        return resultado1+css+resultado2;
+    }
 
 }
