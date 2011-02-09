@@ -44,9 +44,14 @@ public class Inicio extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             // TODO output your page here
+            String usrAgent=request.getHeader("User-Agent");
+            boolean esMovil=(usrAgent.toLowerCase().contains("iphone"))||(usrAgent.toLowerCase().contains("android"));
             out.println("<html>");
             out.println("<head>");
-            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"CSS/css2/style.css\">");
+            if (esMovil)
+                out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"CSS/cssMob/style.css\">");
+            else
+                out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"CSS/css2/style.css\">");
             out.println("<title>El Tabique</title>");
             out.println("</head>");
             out.println("<body>");
