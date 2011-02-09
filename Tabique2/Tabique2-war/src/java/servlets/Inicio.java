@@ -46,7 +46,7 @@ public class Inicio extends HttpServlet {
             // TODO output your page here
             out.println("<html>");
             out.println("<head>");
-            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"Estilo/style.css\">");
+            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"CSS/css2/style.css\">");
             out.println("<title>El Tabique</title>");
             out.println("</head>");
             out.println("<body>");

@@ -1,0 +1,114 @@
+body {
+background-color:#300000;
+font-size:12pt;
+font-family:Helvetica;
+margin:0;
+padding:0;
+color:#FFFFFF;
+background-image:url(images/page2.png);
+background-repeat:repeat-y;
+background-position:top center;
+}
+
+#page {
+width:900px;
+margin:auto;
+padding:auto;
+background-image:url(images/pagetop2.png);
+background-repeat:no-repeat;
+}
+
+#autor {
+font-size:10pt;
+color:#CCCCCC;
+}
+
+#header {
+clear:both;
+width:900px;
+height:63px;
+background-image:url(images/menulinks2.png);
+}
+
+#headerleft {
+float:left;
+width:280px;
+height:51px;
+padding-top:12px;
+padding-left:15px;
+}
+
+#menulinks {
+float:right;
+margin-right:10px;
+margin-top:10px;
+
+}
+
+#menulinks a {
+	padding-left:15px;
+	padding-right:15px;
+	padding-top:23px;
+	height:40px;
+    background-image:none;
+	display:block;
+	color:#FFFFFF;
+	text-decoration:none;
+	float:right;
+	font-size:14px;
+	font-weight:bold;
+	margin-left:3px;
+  }
+
+
+#mainarea {
+width:880px;
+clear:both;
+padding-left:20px;
+}
+
+#contentarea {
+width:580px;
+padding-right:35px;
+padding-bottom:20px;
+margin-bottom:45px;
+float:left;
+line-height:14pt;
+background-image:none;
+}
+
+#sidebar {
+float:left;
+width:225px;
+line-height:14pt;
+background-image:none;
+}
+
+#footer {
+width:900px;
+clear:both;
+height:35px;
+padding-top:33px;
+text-align:center;
+line-height:14pt;
+background-image:url(images/footer2.png);
+background-repeat:no-repeat;
+background-color:#000000;
+position: fixed;
+bottom: 0px;
+}
+
+h1 {
+text-align:left;
+padding-top:10px;
+font-size:25pt;
+color:#FFFFFF;
+margin:0;
+text-decoration:none;
+}
+
+h2 {
+text-align:right;
+font-size:15pt;
+color:#500000;
+}
