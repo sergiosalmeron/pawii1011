@@ -23,15 +23,7 @@
 %>
 <html>
     <head>
-        <% String usrAgent=request.getHeader("User-Agent");
-        boolean esMovil=(usrAgent.toLowerCase().contains("iphone"))||(usrAgent.toLowerCase().contains("android"));
-        if (esMovil){%>
-                        <link rel="stylesheet" type="text/css" href="CSS/cssMob/style.css">
-        <%          }
-        else{%>
-                        <link rel="stylesheet" type="text/css" href="CSS/css2/style.css">
-        <%          }%>
-            
+        <jsp:include page="Modulos/estilo.jsp" />
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>El Tabique</title>
