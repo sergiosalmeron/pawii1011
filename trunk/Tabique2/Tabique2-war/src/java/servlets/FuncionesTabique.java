@@ -74,6 +74,8 @@ public class FuncionesTabique extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Usuario us = (Usuario) request.getSession(false).getAttribute("usuario");
+        //String contenido=request.getParameter("mensaje");
+        //El uso de este constructor del string hace que se almacene con los acentos y demás carateres "extraños"
         String contenido = new String(request.getParameter("mensaje").getBytes("ISO-8859-1"),"UTF-8"); //request.getParameter("mensaje");
         if (us != null && us.getRol() == Rol.Autorizado && contenido != null) {
             if (!contenido.equalsIgnoreCase("")){
@@ -91,6 +93,8 @@ public class FuncionesTabique extends HttpServlet {
             request.getSession(false).setAttribute("MensajeStatus", new MensajePantalla("ERROR, no se ha podido publicar el mensaje", true));
         }
 
+        //Primero realizamos las operaciones en el dopost puesto que es el método usado por los formularios para llegar aquí
+        //Una vez acabadas las operaciones, redirigimos a la página principal
         processRequest(request, response);
 
     }

@@ -114,8 +114,9 @@ public class Inicio extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        //debido a que en las pruebas no se eliminan bien las cookies, comento la linea que llama a "cargaCookies";
+        //cargaCookies(request);
         redirige(request, response);
-        //processRequest(request, response);
     }
 
     /**
@@ -147,11 +148,15 @@ public class Inicio extends HttpServlet {
     private void procesaLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int valoresNull=0;
         String tipo=request.getParameter("tipo");
-        if (tipo==null)
+        if (tipo==null){
             valoresNull++;
+        }
+            
         String nombre=request.getParameter("nombre");
-        if (nombre==null)
+        if (nombre==null){
             valoresNull++;
+        }
+            
         if (valoresNull==0){
             if (usuarios.login(nombre,tipo)){
                     Usuario usuario=usuarios.getUsuario(nombre);
@@ -169,6 +174,8 @@ public class Inicio extends HttpServlet {
                 loginErroneo=true;
         }
     }
+
+
 
     private void redirige(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession sesion=request.getSession(false);
@@ -230,6 +237,28 @@ public class Inicio extends HttpServlet {
         if (c2!=null)
             c2.setMaxAge(0);
     }
+
+    private void cargaCookies(HttpServletRequest request){
+        if (request.getSession().getAttribute("usuario")==null){
+            String tipo=null;
+            String nombre=null;
+
+            Cookie c=getCookie(request, "tipo");
+            if (c!=null)
+               tipo =c.getValue();
+
+            c=getCookie(request, "usuario");
+            if (c!=null)
+                nombre=c.getValue();
+            
+            if ((nombre!=null)&&(tipo!=null))
+                if (usuarios.login(nombre,tipo)){
+                        Usuario usuario=usuarios.getUsuario(nombre);
+                        request.getSession(true).setAttribute("usuario", usuario);
+                }
+        }
+    }
+
 
     private void procesaEstilo(HttpServletRequest request){
         String valorCss=request.getParameter("css");
