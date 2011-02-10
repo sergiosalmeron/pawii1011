@@ -31,5 +31,6 @@ public interface MensajeFacadeLocal {
 
     public List<Mensaje> findLOQUESEA();
     public List<Mensaje> getAllMenssages();
+    public void eliminaMensajesDe(Usuario usu);
 
 }

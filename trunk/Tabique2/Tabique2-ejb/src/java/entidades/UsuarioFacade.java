@@ -6,6 +6,7 @@
 package entidades;
 
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -18,6 +19,8 @@ import utiles.Rol;
  */
 @Stateless
 public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFacadeLocal, UsuarioFacadeRemote {
+    @EJB
+    private MensajeFacadeLocal mensajeFacade;
     @PersistenceContext(unitName = "Tabique2-ejbPU")
     private EntityManager em;
 
@@ -140,6 +143,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
     public boolean eliminaUsuario(String nombre){
         Usuario usu=getUsuario(nombre);
         if (usu!=null){
+            mensajeFacade.eliminaMensajesDe(usu);
             this.remove(usu);
             return true;
         }
