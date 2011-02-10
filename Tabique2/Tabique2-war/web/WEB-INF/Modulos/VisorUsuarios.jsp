@@ -4,6 +4,7 @@
     Author     : sergio
 --%>
 
+<%@page import="utilesInterfaz.DetectorMovil"%>
 <%@page import="javax.naming.InitialContext"%>
 <%@page import="javax.naming.Context"%>
 <%@page import="javax.naming.Context"%>
@@ -26,20 +27,14 @@
             /*Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);*/
         }
-
-            String usrAgent=request.getHeader("User-Agent");
-            boolean esMovil=(usrAgent.toLowerCase().contains("iphone"))||(usrAgent.toLowerCase().contains("android"))||(usrAgent.toLowerCase().contains("symbian"));
-
             List<Usuario> lista=null;
             lista=usuarios.getAllUsuarios();
             for (Usuario u:lista){
                 String nombre=u.getNombre();
                 Rol rol=u.getRol();
-                if(!esMovil){
-        %>
-
-                        <img src="imgs/cua.jpg" heigh="15px" width="15px" class="userPapelera" id="<%=nombre%>" />
-                            <%}%>
+                if(!DetectorMovil.esMovil(request)){%>
+                    <img src="imgs/cua.jpg" heigh="15px" width="15px" class="userPapelera" id="<%=nombre%>" />
+                                                <%}%>
                 <%=nombre%>: es <%=rol.toString()%>. Convertir en:
                 <br />
                 <FORM action="FuncionesUsuarios" method="post">

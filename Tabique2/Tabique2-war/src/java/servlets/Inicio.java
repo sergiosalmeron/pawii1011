@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import utiles.Rol;
+import utilesInterfaz.DetectorMovil;
 
 /**
  *
@@ -60,15 +61,18 @@ public class Inicio extends HttpServlet {
                 out.println("<div id=\"header\">");
                 out.println("<h1>El tabique</h1>");
 
-                out.println("<div id=\"menulinks\">");
-                       out.println("<form action=\"Inicio\" method=\"post\">");
-                            out.println("<select name=\"css\" onchange=\"this.form.submit()\">");
-                                out.println("<option value=\"0\">estilos</option>");
-                                out.println("<option value=\"1\">Estilo 1</option>");
-                                out.println("<option value=\"2\">Estilo 2</option>");
-                            out.println("</select>");
-                        out.println("</form>");
-                out.println("</div>");//<div id="menulinks">
+                if (!DetectorMovil.esMovil(request)){
+                        out.println("<div id=\"menulinks\">");
+                               out.println("<form action=\"Inicio\" method=\"post\">");
+                                    out.println("<select name=\"css\" onchange=\"this.form.submit()\">");
+                                        out.println("<option value=\"0\">estilos</option>");
+                                        out.println("<option value=\"1\">Estilo 1</option>");
+                                        out.println("<option value=\"2\">Estilo 2</option>");
+                                    out.println("</select>");
+                                out.println("</form>");
+                        out.println("</div>");//<div id="menulinks">
+                }
+                
                 
                 out.println("</div>");//header
 
