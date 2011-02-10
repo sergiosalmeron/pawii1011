@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="utilesInterfaz.DetectorMovil"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
@@ -13,10 +14,7 @@
         Hola &nbsp <%=session.getAttribute("usuario")%> &nbsp
     </div>
     <div id="menulinks">
-        <%String usrAgent=request.getHeader("User-Agent");
-          boolean esMovil=(usrAgent.toLowerCase().contains("iphone"))||(usrAgent.toLowerCase().contains("android"))||(usrAgent.toLowerCase().contains("symbian"));
-          if (!esMovil){
-        %>
+        <%if (!DetectorMovil.esMovil(request)){%>
                 <form action="Inicio" method="post">
                     <select name="css" onchange="this.form.submit()">
                         <option value="0">estilos</option>
