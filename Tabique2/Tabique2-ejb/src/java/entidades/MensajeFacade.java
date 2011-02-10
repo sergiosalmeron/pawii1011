@@ -61,4 +61,26 @@ public class MensajeFacade extends AbstractFacade<Mensaje> implements MensajeFac
         return this.findAll();
       }
 
+    @Override
+    public void eliminaMensajesDe(Usuario usu){
+          List<Mensaje> lista= getMensajesDe(usu);
+          for (Mensaje mensa:lista)
+             this.remove(mensa);
+    }
+
+
+    private List<Mensaje> getMensajesDe(Usuario usu) {
+        javax.persistence.criteria.CriteriaQuery cq =
+                getEntityManager().getCriteriaBuilder().createQuery(Mensaje.class);
+        Root<Mensaje> messageinstances = cq.from(Mensaje.class);
+        javax.persistence.criteria.Predicate condition = getEntityManager().getCriteriaBuilder().equal(
+                messageinstances.get( "autor"),usu);
+        cq.where(condition);
+
+        List<Mensaje> lista= getEntityManager().createQuery(cq).getResultList();
+        return lista;
+
+
+    }
+
 }
