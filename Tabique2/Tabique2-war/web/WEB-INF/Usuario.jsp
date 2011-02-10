@@ -24,9 +24,11 @@
 <html>
     <head>
         <jsp:include page="Modulos/estilo.jsp" />
-
+        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
         <title>El Tabique</title>
+        <script language="JavaScript" src ="JS/funciones.js"> </script>
     </head>
     <body>
         <div id="page">

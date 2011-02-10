@@ -25,3 +25,9 @@
     Nombre de usuario: <INPUT type="text" size="16" name="viejoUsuario" value="Escriba aquí el nombre del usuario"><br />
      <input type="submit" value="Borrar">
 </FORM>
+<%String usrAgent=request.getHeader("User-Agent");
+  boolean esMovil=(usrAgent.toLowerCase().contains("iphone"))||(usrAgent.toLowerCase().contains("android"))||(usrAgent.toLowerCase().contains("symbian"));
+  if (!esMovil){
+%>
+<img src="imgs/pape.jpg" class="papelera" />
+<% } %>

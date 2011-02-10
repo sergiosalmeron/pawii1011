@@ -27,13 +27,20 @@
             throw new RuntimeException(ne);*/
         }
 
+            String usrAgent=request.getHeader("User-Agent");
+            boolean esMovil=(usrAgent.toLowerCase().contains("iphone"))||(usrAgent.toLowerCase().contains("android"))||(usrAgent.toLowerCase().contains("symbian"));
+
             List<Usuario> lista=null;
             lista=usuarios.getAllUsuarios();
             for (Usuario u:lista){
                 String nombre=u.getNombre();
                 Rol rol=u.getRol();
+                if(!esMovil){
         %>
-        <%=nombre%>: es <%=rol.toString()%>. Convertir en:
+
+                        <img src="imgs/cua.jpg" heigh="15px" width="15px" class="userPapelera" id="<%=nombre%>" />
+                            <%}%>
+                <%=nombre%>: es <%=rol.toString()%>. Convertir en:
                 <br />
                 <FORM action="FuncionesUsuarios" method="post">
                 <input type="hidden" name="victima" value="<%=nombre%>" />
@@ -47,6 +54,11 @@
                 %>
                 <br />
                 </FORM>
+                <form name="formPapelera" action="FuncionesUsuarios" method="post">
+                    <input type="hidden" name="viejoUsuario">
+                    
+                </form>
+
         <%
             }
         %>
