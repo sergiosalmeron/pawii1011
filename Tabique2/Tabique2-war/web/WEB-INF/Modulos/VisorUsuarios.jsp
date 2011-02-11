@@ -49,10 +49,7 @@
                 %>
                 <br />
                 </FORM>
-                <form name="formPapelera" action="FuncionesUsuarios" method="post">
-                    <input type="hidden" name="viejoUsuario">
-                    
-                </form>
+                
 
         <%
             }

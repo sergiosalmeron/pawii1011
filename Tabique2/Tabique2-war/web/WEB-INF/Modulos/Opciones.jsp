@@ -20,6 +20,7 @@
                         <option value="0">estilos</option>
                         <option value="1">Estilo 1</option>
                         <option value="2">Estilo 2</option>
+                        <option value="3">Estilo 3</option>
                     </select>
                 </form>
         <%}

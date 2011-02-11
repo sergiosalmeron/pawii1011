@@ -28,4 +28,8 @@
 </FORM>
 <%if (!DetectorMovil.esMovil(request)){%>
     <img src="imgs/pape.jpg" class="papelera" />
+    <form name="formPapelera" action="FuncionesUsuarios" method="post">
+                    <input type="hidden" name="viejoUsuario">
+
+    </form>
 <% } %>

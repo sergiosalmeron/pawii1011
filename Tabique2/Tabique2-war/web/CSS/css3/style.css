@@ -74,3 +74,9 @@ font-size:15pt;
 color:#FFFFFF;
 padding-top:6px;
 }
+
+#menulinks {
+float:right;
+margin-right:25px;
+margin-top:10px;
+}
