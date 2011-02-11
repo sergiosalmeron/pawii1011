@@ -68,6 +68,7 @@ public class Inicio extends HttpServlet {
                                         out.println("<option value=\"0\">estilos</option>");
                                         out.println("<option value=\"1\">Estilo 1</option>");
                                         out.println("<option value=\"2\">Estilo 2</option>");
+                                        out.println("<option value=\"3\">Estilo 3</option>");
                                     out.println("</select>");
                                 out.println("</form>");
                         out.println("</div>");//<div id="menulinks">
@@ -265,7 +266,7 @@ public class Inicio extends HttpServlet {
         if (valorCss!=null){
             int css=Integer.parseInt(valorCss);
             int valor=2;
-            if ((css>0)&&(css<3))
+            if ((css>0)&&(css<4))
                 valor=css;
             request.getSession().setAttribute("css", valor);
         }
